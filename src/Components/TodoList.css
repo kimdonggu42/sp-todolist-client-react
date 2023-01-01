@@ -1,0 +1,26 @@
+.todoListContainer {
+    display: flex;
+    border: solid 1px red;
+}
+
+.checkTodo {
+    flex: 1 0 0 ;
+    text-align: center;
+    margin: auto;
+}
+
+.todocontent {
+    flex: 7 0 0 ;
+    margin: auto;
+}
+
+.information {
+    flex: 3 0 0 ;
+    margin: auto;
+}
+
+.delete {
+    flex: 1 0 0 ;
+    text-align: center;
+    margin: auto;
+}

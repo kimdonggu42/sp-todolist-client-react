@@ -1,0 +1,15 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+    background-image: url("https://blog.kakaocdn.net/dn/dARyeJ/btqDwDM9Kj4/Ii5Y4QDigqBw2K7c8L0pk0/img.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
