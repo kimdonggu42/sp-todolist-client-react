@@ -12,9 +12,11 @@ function Input() {
         window.localStorage.setItem('localData', JSON.stringify(todoData))
     }, [todoData])
 
+
     // localData 추가
     const [todoText, setTodoText] = useState('');
-    const addTodoText = () => {
+
+    const addTodoText = () => {  // event가 인자로 안 들어오면 키를 누를때도 실행되고 땠을때도 실행되고 2번 실행된다 ??
         const newTodoText = {
             id: todoData.length + 10,
             createdAt: new Date(),
@@ -27,24 +29,38 @@ function Input() {
     // localData 삭제
     const deleteTodoText = (deleteId) => {
         setTodoData(todoData.filter((value) => value.id !== deleteId));
-    }
+    };
 
-    const handleChangText = (event) => {
+    const handleChangTodoText = (event) => {
         setTodoText(event.target.value)
+    };
+
+    // Enter 키 입력 시에도 동일하게 addTodoText 이벤트 핸들러 동작하게 하는 이벤트 핸들러
+    const handleKeyupTodoText = (event) => {
+        if (event.key === 'Enter' && event.nativeEvent.isComposing === false) {
+            addTodoText(event);
+        }
+    };
+
+    // 체크박스 상태 체크
+    const [checkedItems, setCheckedItems] = useState([])
+
+    const handleCheckChange = (checked, id) => {
+        if (checked) {
+            setCheckedItems([...checkedItems, id]);
+        } else {
+            setCheckedItems(checkedItems.filter((value) => value !== id));
+        }
+        console.log(checked)
     };
 
     return (
         <div>
             <div className="inputContainer">
-                <div className="input">
-                    <input type='text' value={todoText} onChange={handleChangText} />
-                </div>
-                <div className="submit">
-                    <button onClick={addTodoText}>추가</button>
-                </div>
+                <input className="input" type='text' value={todoText} placeholder="What's your plan?" onChange={handleChangTodoText} onKeyUp={handleKeyupTodoText} />
             </div>
-            {todoData.map((value) =>
-                <TodoList list={value} key={value.id} deleteButton={deleteTodoText} />
+            {todoData.map((value, index) =>
+                <TodoList list={value} key={index} deleteButton={deleteTodoText} handleCheckChange={handleCheckChange} checkedItems={checkedItems} />
             )}
         </div>
     );

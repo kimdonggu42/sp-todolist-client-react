@@ -1,5 +1,15 @@
 .inputContainer {
-    display: flex;
-    justify-content: center;
     border: solid 1px red;
+    margin: 20px 0px 20px 0px;
+}
+
+.input {
+    width: 100%;
+    padding: 10px 5px 10px 5px;
+    border: none;
+    border-bottom: solid 1px black;
+    font-weight: 600;
+}
+.input:focus {
+    outline: none;
 }

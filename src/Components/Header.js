@@ -1,10 +1,12 @@
 import './Header.css';
 
 function Header() {
-    
+
     return (
-        <div className='title'>
-            Todo List
+        <div className='titleContainer'>
+            <div className='title'>
+                t o d o : : l i s t
+            </div>
         </div>
     );
 }
