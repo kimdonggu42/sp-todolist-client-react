@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import './Main.css';
+import uuid from "react-uuid";
 import dummyData from "../dummyData";
 import TodoList from "./TodoList";
 import Pagenation from "./Pagenation";
@@ -27,7 +28,7 @@ function Main() {
     // 새로운 todo 추가하는 이벤트 핸들러
     const addTodoText = () => {
         const newTodoText = {
-            id: todoData.length + 10,
+            id: uuid(),
             createdAt: new Date(),
             content: todoText,
         };

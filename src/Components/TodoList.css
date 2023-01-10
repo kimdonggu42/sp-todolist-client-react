@@ -7,6 +7,10 @@
 
 .clearTodoContent {
     color: gray;
+}
+
+.clearTodoContent>.todocontent {
+    color: gray;
     text-decoration: line-through;
 }
 
@@ -32,6 +36,7 @@
     border-bottom: solid 1px black;
     font-weight: 600;
 }
+
 .editTodoContent:focus {
     outline: none;
 }
@@ -91,9 +96,6 @@
     display: inline-block;
     position: absolute;
     cursor: pointer;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
 }
 
 .checkTodo input[type="checkbox"]+label:before {
