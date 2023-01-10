@@ -18,18 +18,59 @@
     padding-left: 10px;
 }
 
-.information {
+.editTodoContent {
+    flex: 9 0 0;
+    margin: auto;
+    padding-left: 10px;
+    padding: 10px 5px 10px 5px;
+    border: none;
+    border-bottom: solid 1px black;
+    font-weight: 600;
+}
+.editTodoContent:focus {
+    outline: none;
+}
+
+.inputDate {
     flex: 3 0 0;
     margin: auto;
+    text-align: center;
+    font-size: 15px;
 }
 
 .delete {
     flex: 0.5 0 0;
-    text-align: right;
+    text-align: center;
     margin: auto;
 }
 
 .deleteButton {
+    border: none;
+    background-color: transparent;
+    font-size: 18px;
+}
+
+.edit {
+    flex: 0.5 0 0;
+    text-align: center;
+    margin: auto;
+    padding-right: 5px;
+}
+
+.editButton {
+    border: none;
+    background-color: transparent;
+    font-size: 18px;
+}
+
+.complete {
+    flex: 0.5 0 0;
+    text-align: center;
+    margin: auto;
+    padding-right: 5px;
+}
+
+.completeButton {
     border: none;
     background-color: transparent;
     font-size: 20px;

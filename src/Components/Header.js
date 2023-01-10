@@ -5,7 +5,7 @@ function Header() {
     return (
         <div className='titleContainer'>
             <div className='title'>
-                t o d o : : l i s t
+                T I T L E
             </div>
         </div>
     );
