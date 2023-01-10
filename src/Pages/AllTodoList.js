@@ -1,15 +1,15 @@
 import React from "react";
 import Header from "../Components/Header";
-import Input from "../Components/Input";
+import Main from "../Components/Main";
 
-function Main() {
+function AllTodoList() {
 
     return (
         <div className="mainPage">
             <Header />
-            <Input />
+            <Main />
         </div>
     );
 }
 
-export default Main;
+export default AllTodoList;

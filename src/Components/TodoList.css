@@ -5,6 +5,11 @@
     font-weight: 600;
 }
 
+.clearTodoContent {
+    color: gray;
+    text-decoration: line-through;
+}
+
 .checkTodo {
     flex: 0.5 0 0;
     text-align: left;

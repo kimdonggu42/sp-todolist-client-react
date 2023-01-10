@@ -21,16 +21,15 @@ function TodoList({ list, deleteButton, handleCheckChange, checkedItems, todoDat
         setNewText(e.target.value);
     };
 
-    const onClickSubmitButton = (e) => {
-        const nextList = todoData.map((value) => ({
-            ...value, content: value.id === list.id ? newText : value.content,
-        }))
+    const onClickSubmitButton = () => {
+        const nextList = todoData.map((value) => ({ ...value, content: value.id === list.id ? newText : value.content }));
         setTodoData(nextList)
         setEdit(false)
     };
 
     return (
-        <div className="todoListContainer">
+        // 체크된 todoList 컬러 변경 조건부 렌더링
+        <li key={list.id} className={`todoListContainer ${checkedItems.includes(list.id) ? 'clearTodoContent' : null}`}> 
             <div className="checkTodo">
                 {/* 체크박스 */}
                 <input
@@ -41,22 +40,27 @@ function TodoList({ list, deleteButton, handleCheckChange, checkedItems, todoDat
                 />
                 <label htmlFor={list.id}></label>
             </div>
-            {/* 기존에 등록해둔 content 수정 */}
-            {edit ? (<input className="editTodoContent" type='text' value={newText} ref={editInputRef} onChange={onChangeEditInput}></input>)
+            {/* todo텍스트 */}
+            {/* edit 버튼을 클릭하면 todoContent 수정 상태가 되고, 다시 edit 버튼을 클릭하면 수정한 todoContent가 저장된다. */}
+            {edit ?
+                (<input className="editTodoContent" type='text' value={newText} ref={editInputRef} onChange={onChangeEditInput}></input>)
                 : (<div className="todocontent">{list.content}</div>)}
             {/* 데이터 등록 날짜 및 시간 */}
             <div className="inputDate">{new Date(list.createdAt).toLocaleString()}</div>
+            {/* todo 수정 버튼 */}
             {/* 평소(수정 상태가 아닐 때)에는 수정 버튼을 띄우고, 클릭 시 수정 완료 버튼을 띄운다. */}
-            {edit ? (<div className="complete">
-                <button className="completeButton" onClick={onClickSubmitButton}><i className="fa-regular fa-square-check"></i></button>
-            </div>) : (<div className="edit">
-                <button className="editButton" onClick={onClickEditButton}><i className="fa-regular fa-pen-to-square"></i></button>
-            </div>)}
-            {/* 삭제 버튼 */}
+            {edit ?
+                (<div className="complete">
+                    <button className="completeButton" onClick={onClickSubmitButton}><i className="fa-regular fa-square-check"></i></button>
+                </div>)
+                : (<div className="edit">
+                    <button className="editButton" onClick={onClickEditButton}><i className="fa-regular fa-pen-to-square"></i></button>
+                </div>)}
+            {/* todo 삭제 버튼 */}
             <div className="delete">
                 <button className="deleteButton" onClick={() => deleteButton(list.id)}><i className="fa-regular fa-trash-can"></i></button>
             </div>
-        </div>
+        </li>
     );
 }
 

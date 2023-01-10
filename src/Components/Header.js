@@ -3,11 +3,11 @@ import './Header.css';
 function Header() {
 
     return (
-        <div className='titleContainer'>
+        <header>
             <div className='title'>
                 T I T L E
             </div>
-        </div>
+        </header>
     );
 }
 

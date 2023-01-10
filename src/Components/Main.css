@@ -13,3 +13,12 @@
 .input:focus {
     outline: none;
 }
+
+ul {
+    /* border: solid 1px red; */
+    min-height: 450px;
+}
+
+.selectDataCount {
+    text-align: right;
+}
