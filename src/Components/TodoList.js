@@ -1,11 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
 import './TodoList.css';
 
-function TodoList({ list, deleteButton, handleCheckChange, checkedItems, todoData, setTodoData }) {
-    // 수정 모드 상태
-    const [edit, setEdit] = useState(false);
-    // 수정한 값이 담길 변수
-    const [newContent, setNewContent] = useState(list.content);
+function TodoList({ list, handleCheckChange, checkedItems, todoData, setTodoData }) {
+    const [edit, setEdit] = useState(false);  // 수정 모드 상태
+    const [newContent, setNewContent] = useState(list.content);  // 수정한 값이 담길 변수
+    const [isOpen, setIsOpen] = useState(false);  //
 
     const editInputRef = useRef(null);
     // edit 버튼을 클릭했을 때, ref를 props로 넘겨준 input 속성에 focus된다.
@@ -33,6 +32,21 @@ function TodoList({ list, deleteButton, handleCheckChange, checkedItems, todoDat
         setTodoData(editTodoList)
         // 수정 모드 끄기
         setEdit(false)
+    };
+
+    // 삭제 버튼
+    const deleteButton = (deleteId) => {
+        setTodoData(todoData.filter((value) => value.id !== deleteId));
+    };
+
+    // 모달 오픈 이벤트 핸들러
+    const openModalHandler = () => {
+        setIsOpen(!isOpen)
+    };
+
+    // 이벤트 버블링 방지
+    const stopEvent = (event) => {
+        event.stopPropagation()
     };
 
     return (
@@ -65,9 +79,19 @@ function TodoList({ list, deleteButton, handleCheckChange, checkedItems, todoDat
                         <button className="editButton" onClick={onClickEditButton}><i className="fa-regular fa-pen-to-square"></i></button>
                     </div>)
                 : null}
-            {/* todo 삭제 버튼 */}
+            {/* todo 삭제 모달 팝업 버튼 */}
             <div className="delete">
-                <button className="deleteButton" onClick={() => deleteButton(list.id)}><i className="fa-regular fa-trash-can"></i></button>
+                <button className="popUpDeleteModal" onClick={openModalHandler}><i className="fa-regular fa-trash-can"></i></button>
+                {isOpen ?
+                    <div className="modalBackdrop">
+                        <div className="modalView" onClick={stopEvent}>
+                            <img className="warningIcon" src="../img/warning.png" alt="warning logo" />
+                            <div className="warningMessage">정말 삭제하시겠습니까?</div>
+                            <button className="cancelButton" onClick={openModalHandler}>취소</button>
+                            <button className="deleteButton" onClick={() => deleteButton(list.id)}>삭제</button>
+                        </div>
+                    </div>
+                    : null}
             </div>
         </li>
     );

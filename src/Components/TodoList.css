@@ -9,81 +9,11 @@
     color: gray;
 }
 
-.clearTodoContent>.todocontent {
-    color: gray;
-    text-decoration: line-through;
-}
-
 .checkTodo {
     flex: 0.5 0 0;
     text-align: left;
     margin: auto;
     padding-left: 5px;
-}
-
-.todocontent {
-    flex: 9 0 0;
-    margin: auto;
-    padding-left: 10px;
-}
-
-.editTodoContent {
-    flex: 9 0 0;
-    margin: auto;
-    padding-left: 10px;
-    padding: 10px 5px 10px 5px;
-    border: none;
-    border-bottom: solid 1px black;
-    font-weight: 600;
-}
-
-.editTodoContent:focus {
-    outline: none;
-}
-
-.inputDate {
-    flex: 2 0 0;
-    margin: auto;
-    text-align: center;
-    font-size: 15px;
-}
-
-.delete {
-    flex: 0.5 0 0;
-    text-align: center;
-    margin: auto;
-}
-
-.deleteButton {
-    border: none;
-    background-color: transparent;
-    font-size: 18px;
-}
-
-.edit {
-    flex: 0.5 0 0;
-    text-align: center;
-    margin: auto;
-    padding-right: 5px;
-}
-
-.editButton {
-    border: none;
-    background-color: transparent;
-    font-size: 18px;
-}
-
-.complete {
-    flex: 0.5 0 0;
-    text-align: center;
-    margin: auto;
-    padding-right: 5px;
-}
-
-.completeButton {
-    border: none;
-    background-color: transparent;
-    font-size: 20px;
 }
 
 /* 체크박스 디자인 */
@@ -130,4 +60,144 @@
     -ms-transform: rotate(45deg);
     -webkit-transform: rotate(45deg);
     transform: rotate(45deg);
+}
+
+.editTodoContent {
+    flex: 9 0 0;
+    margin: auto;
+    padding-left: 10px;
+    padding: 10px 5px 10px 5px;
+    border: none;
+    border-bottom: solid 1px black;
+    font-weight: 600;
+}
+
+.editTodoContent:focus {
+    outline: none;
+}
+
+.clearTodoContent>.todocontent {
+    color: gray;
+    text-decoration: line-through;
+}
+
+.todocontent {
+    flex: 9 0 0;
+    margin: auto;
+    padding-left: 10px;
+}
+
+.inputDate {
+    flex: 2 0 0;
+    margin: auto;
+    text-align: center;
+    font-size: 15px;
+}
+
+.complete {
+    flex: 0.5 0 0;
+    text-align: center;
+    margin: auto;
+    padding-right: 5px;
+}
+
+.completeButton {
+    border: none;
+    background-color: transparent;
+    font-size: 20px;
+}
+
+.edit {
+    flex: 0.5 0 0;
+    text-align: center;
+    margin: auto;
+    padding-right: 5px;
+}
+
+.editButton {
+    border: none;
+    background-color: transparent;
+    font-size: 18px;
+}
+
+.delete {
+    flex: 0.5 0 0;
+    text-align: center;
+    margin: auto;
+}
+
+.popUpDeleteModal {
+    border: none;
+    background-color: transparent;
+    font-size: 18px;
+}
+
+.modalBackdrop {
+    position: fixed;
+    z-index: 999;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.4);
+    display: grid;
+    place-items: center;
+}
+
+.modalView {
+    border-radius: 5px;
+    background-color: white;
+    width: 400px;
+    height: 200px;
+    color: black;
+}
+
+.warningIcon {
+    width: 60px;
+    height: 60px;
+    margin: 25px 0px 15px 0px;
+}
+
+.warningMessage {
+    margin-bottom: 15px;
+}
+
+.cancelButton+.deleteButton {
+    margin-left: 20px;
+}
+
+.cancelButton,
+.deleteButton {
+    width: 60px;
+    height: 30px;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.cancelButton {
+    background-color: #3184d5;
+}
+
+.cancelButton:hover {
+    background-color: #64AAFF;
+    text-decoration: none;
+}
+
+.cancelButton:active {
+    background-color: #3184d5;
+}
+
+.deleteButton {
+    background-color: #d33031;
+}
+
+.deleteButton:hover {
+    background-color: #E68282;
+    text-decoration: none;
+}
+
+.deleteButton:active {
+    background-color: #d33031;
 }

@@ -11,12 +11,13 @@ function Main() {
     const [todoText, setTodoText] = useState('');
     const [currentTab, setCurrentTab] = useState(0);
 
+    // 메뉴 리스트 조건부 렌더링 배열 리스트
     const menuArr = [
         { name: 'ALL' },
         { name: 'Complete' },
         { name: 'Incomplete' },
     ];
-
+    // 메뉴 리스트 조건부 렌더링 이벤트 핸들러
     const selectMenuHandler = (index) => {
         setCurrentTab(index);
     };
@@ -49,11 +50,6 @@ function Main() {
         };
     };
 
-    // DELETE
-    const deleteTodoText = (deleteId) => {
-        setTodoData(todoData.filter((value) => value.id !== deleteId));
-    };
-
     // 새로운 todoData 등록 시 input 상태 관리
     const handleChangeTodoText = (event) => {
         setTodoText(event.target.value)
@@ -73,7 +69,6 @@ function Main() {
         } else {
             setCheckedItems(checkedItems.filter((value) => value !== id));
         }
-        console.log(checked)
     };
 
 
@@ -81,7 +76,7 @@ function Main() {
         <main>
             {/* 투두데이터 입력 창 */}
             <div className="inputContainer">
-                <input className="todoInput" type='text' value={todoText} placeholder="text" onChange={handleChangeTodoText} onKeyUp={handleKeyupTodoText} />
+                <input className="todoInput" type='text' value={todoText} placeholder="할 일을 입력해주세요" onChange={handleChangeTodoText} onKeyUp={handleKeyupTodoText} />
             </div>
             {/* 리스트 목록 선택 탭 및 리스트 노출 개수 선택 드롭다운 */}
             <div className="selectContainer">
@@ -110,7 +105,6 @@ function Main() {
                         <TodoList
                             list={value}
                             key={value.id}
-                            deleteButton={deleteTodoText}
                             handleCheckChange={handleCheckChange}
                             checkedItems={checkedItems}
                             todoData={todoData}
@@ -123,7 +117,6 @@ function Main() {
                             <TodoList
                                 list={value}
                                 key={value.id}
-                                deleteButton={deleteTodoText}
                                 handleCheckChange={handleCheckChange}
                                 checkedItems={checkedItems}
                                 todoData={todoData}
@@ -135,7 +128,6 @@ function Main() {
                             <TodoList
                                 list={value}
                                 key={value.id}
-                                deleteButton={deleteTodoText}
                                 handleCheckChange={handleCheckChange}
                                 checkedItems={checkedItems}
                                 todoData={todoData}
