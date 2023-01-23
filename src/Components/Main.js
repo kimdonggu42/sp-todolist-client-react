@@ -18,7 +18,6 @@ function Main() {
     ];
 
     const selectMenuHandler = (index) => {
-        console.log('tab change')
         setCurrentTab(index);
     };
 
@@ -43,7 +42,6 @@ function Main() {
             id: uuid(),
             createdAt: new Date(),
             content: todoText,
-            checked: false
         };
         if (todoText) {  // input에 입력값이 없으면 새로운 todo를 추가하지 못하게 함
             setTodoData([newTodoText, ...todoData]);
@@ -146,7 +144,8 @@ function Main() {
                     </ul>
                 )}
             {/* 페이지네이션 */}
-            <Pagenation allPageLength={todoData.length}
+            <Pagenation
+                allPageLength={todoData.length}
                 completePageLength={todoData.filter((value) => checkedItems.includes(value.id)).length}
                 incompletePageLength={todoData.filter((value) => !checkedItems.includes(value.id)).length}
                 limit={limit}

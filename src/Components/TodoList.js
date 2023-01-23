@@ -48,16 +48,14 @@ function TodoList({ list, deleteButton, handleCheckChange, checkedItems, todoDat
                 />
                 <label htmlFor={list.id}></label>
             </div>
-            {/* todoContent */}
-            {/* edit 버튼을 클릭하면 todoContent 수정 상태가 되고, 다시 edit 버튼을 클릭하면 수정한 todoContent가 저장된다. */}
+            {/* todoContent : edit 버튼을 클릭하면 todoContent 수정 상태가 되고, 다시 edit 버튼을 클릭하면 수정한 todoContent가 저장된다. */}
             {edit ?
                 <input className="editTodoContent" type='text' value={newContent} ref={editInputRef} onChange={onChangeEditInput}></input>
                 // (<input className="editTodoContent" type='text' value={newContent} onChange={onChangeEditInput}></input>)
                 : <div className="todocontent">{list.content}</div>}
-            {/* 데이터 등록 날짜 및 시간 */}
-            <div className="inputDate">{new Date(list.createdAt).toLocaleString()}</ div>
-            {/* todo 수정 버튼 */}
-            {/* 평소(수정 상태가 아닐 때)에는 수정 버튼을 띄우고, 클릭 시 수정 완료 버튼을 띄운다. &&  체크된 todo라면 수정 버튼을 숨긴다.*/}
+            {/* 데이터 등록 날짜 */}
+            <div className="inputDate">{new Date(list.createdAt).toLocaleDateString()}</ div>
+            {/* todo 수정 버튼 : 평소(수정 상태가 아닐 때)에는 수정 버튼을 띄우고, 클릭 시 수정 완료 버튼을 띄운다. &&  체크된 todo라면 수정 버튼을 숨긴다. */}
             {!checkedItems.includes(list.id) ?
                 (edit ?
                     <div className="complete">
