@@ -17,3 +17,9 @@ body {
     background-repeat: no-repeat; */
     background-color: white;
 }
+
+.App {
+    width: 80vw;
+    min-width: 350px;
+    max-width: 800px;
+}

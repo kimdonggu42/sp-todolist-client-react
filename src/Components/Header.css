@@ -1,9 +1,9 @@
 .title {
+    /* border: 1px solid red; */
     display: flex;
     justify-content: center;
     margin-bottom: 100px;;
-    width: 800px;
+    width: 100%;
     font-size: 40px;
-    /* border: 1px solid red; */
     color: gray;
 }

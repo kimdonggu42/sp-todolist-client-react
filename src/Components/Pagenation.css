@@ -1,8 +1,27 @@
 .pagenation {
+    /* border: 1px solid red; */
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 5px;
     /* 더블 클릭이나 드래그로 텍스트 선택 방지 */
     user-select: none;
+}
+
+.pageTab, .leftHandle, .rightHandle {
+    width: 20px;
+    height: 20px;
+    font-weight: bold;
+    background-color: transparent;
+    border: none;
+}
+
+.pageFocused {
+    border-radius: 3px;
+    background-color: #f9f9f9;
+    border: 1px solid #dcdcdc;
+}
+
+button:hover {
+    text-decoration: underline;
 }

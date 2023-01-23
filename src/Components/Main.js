@@ -9,6 +9,18 @@ function Main() {
     const [todoData, setTodoData] = useState(() => JSON.parse(window.localStorage.getItem('localData')) || dummyData);
     const [checkedItems, setCheckedItems] = useState(() => JSON.parse(window.localStorage.getItem('localCheckedData')) || []);
     const [todoText, setTodoText] = useState('');
+    const [currentTab, setCurrentTab] = useState(0);
+
+    const menuArr = [
+        { name: 'ALL' },
+        { name: 'Complete' },
+        { name: 'Incomplete' },
+    ];
+
+    const selectMenuHandler = (index) => {
+        console.log('tab change')
+        setCurrentTab(index);
+    };
 
     // 페이지 당 표시할 데이터 수 상태
     const [limit, setLimit] = useState(10);  // 기본값: 10개씩 노출
@@ -31,6 +43,7 @@ function Main() {
             id: uuid(),
             createdAt: new Date(),
             content: todoText,
+            checked: false
         };
         if (todoText) {  // input에 입력값이 없으면 새로운 todo를 추가하지 못하게 함
             setTodoData([newTodoText, ...todoData]);
@@ -43,7 +56,7 @@ function Main() {
         setTodoData(todoData.filter((value) => value.id !== deleteId));
     };
 
-    // input 상태 관리
+    // 새로운 todoData 등록 시 input 상태 관리
     const handleChangeTodoText = (event) => {
         setTodoText(event.target.value)
     };
@@ -65,44 +78,74 @@ function Main() {
         console.log(checked)
     };
 
-    // 새로고침하면 날자 다 바뀜 
-    // data 등록 날짜 및 시간 변환 함수 
-    // const inputTime = () => {
-    //     let now = new Date();
-    //     let year = now.getFullYear();
-    //     let month = now.getMonth() + 1;
-    //     let date = now.getDate();
-    //     let hour = now.getHours();
-    //     let min = now.getMinutes();
-    //     return `${year}/${month}/${date} ${hour} : ${min}`;
-    // }
 
     return (
         <main>
+            {/* 투두데이터 입력 창 */}
             <div className="inputContainer">
-                <input className="input" type='text' value={todoText} placeholder="text" onChange={handleChangeTodoText} onKeyUp={handleKeyupTodoText} />
+                <input className="todoInput" type='text' value={todoText} placeholder="text" onChange={handleChangeTodoText} onKeyUp={handleKeyupTodoText} />
             </div>
-            <div className="selectDataCount">
-                <select type="number" value={limit} onChange={({ target: { value } }) => setLimit(Number(value))}>
-                    <option value="5">5개씩</option>
-                    <option value="10">10개씩</option>
-                    <option value="20">20개씩</option>
-                    <option value="30">30개씩</option>
-                </select>
+            {/* 리스트 목록 선택 탭 및 리스트 노출 개수 선택 드롭다운 */}
+            <div className="selectContainer">
+                <ul className="listTab">
+                    {menuArr.map((tab, index) => {
+                        return (
+                            <li key={index} className={currentTab === index ? 'tab focused' : 'tab'} onClick={() => selectMenuHandler(index)}>
+                                {tab.name}
+                            </li>
+                        )
+                    })}
+                </ul>
+                <div className="listCountDropDown">
+                    <select type="number" value={limit} onChange={(e) => setLimit(Number(e.target.value))}>
+                        <option value="5">5개씩</option>
+                        <option value="10">10개씩</option>
+                        <option value="20">20개씩</option>
+                        <option value="30">30개씩</option>
+                    </select>
+                </div>
             </div>
-            <ul>
-                {todoData.slice(offset, offset + limit).map((value, index) =>
-                    <TodoList
-                        list={value}
-                        key={index}
-                        deleteButton={deleteTodoText}
-                        handleCheckChange={handleCheckChange}
-                        checkedItems={checkedItems}
-                        todoData={todoData}
-                        setTodoData={setTodoData}
-                    />
+            {/* 조건별 리스트 목록 */}
+            {currentTab === 0 ?
+                <ul className="todoList">
+                    {todoData.slice(offset, offset + limit).map((value) =>
+                        <TodoList
+                            list={value}
+                            key={value.id}
+                            deleteButton={deleteTodoText}
+                            handleCheckChange={handleCheckChange}
+                            checkedItems={checkedItems}
+                            todoData={todoData}
+                            setTodoData={setTodoData}
+                        />)}
+                </ul>
+                : (currentTab === 1 ?
+                    <ul className="todoList">
+                        {todoData.filter((value) => checkedItems.includes(value.id)).slice(offset, offset + limit).map((value) =>
+                            <TodoList
+                                list={value}
+                                key={value.id}
+                                deleteButton={deleteTodoText}
+                                handleCheckChange={handleCheckChange}
+                                checkedItems={checkedItems}
+                                todoData={todoData}
+                                setTodoData={setTodoData}
+                            />)}
+                    </ul>
+                    : <ul className="todoList">
+                        {todoData.filter((value) => !checkedItems.includes(value.id)).slice(offset, offset + limit).map((value) =>
+                            <TodoList
+                                list={value}
+                                key={value.id}
+                                deleteButton={deleteTodoText}
+                                handleCheckChange={handleCheckChange}
+                                checkedItems={checkedItems}
+                                todoData={todoData}
+                                setTodoData={setTodoData}
+                            />)}
+                    </ul>
                 )}
-            </ul>
+            {/* 페이지네이션 */}
             <Pagenation total={todoData.length} limit={limit} page={page} setPage={setPage} />
         </main>
     );

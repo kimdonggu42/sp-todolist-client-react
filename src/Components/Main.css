@@ -1,24 +1,51 @@
 .inputContainer {
     /* border: solid 1px red; */
-    margin: 20px 0px 20px 0px;
+    margin: 20px 0px 15px 0px;
 }
 
-.input {
+.todoInput {
     width: 100%;
+    height: 35px;
     padding: 10px 5px 10px 5px;
     border: none;
     border-bottom: solid 1px black;
     font-weight: 600;
-}
-.input:focus {
+}:focus {
     outline: none;
+    border-bottom: solid 2px black;
 }
 
-ul {
+.selectContainer {
     /* border: solid 1px red; */
-    min-height: 450px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
-.selectDataCount {
+.listTab {
+    /* border: solid 1px red; */
+    display: flex;
+    list-style: none;
+}
+.tab {
+    /* border: solid 1px blue; */
+    width: 100px;
+    text-align: center;
+    padding: 5px 5px;
+}
+
+.focused {
+    color: black;
+    border-bottom: 2px solid black;
+    font-weight: bold;
+}
+
+.listCountDropDown {
+    /* border: solid 1px red; */
     text-align: right;
+}
+
+.todoList {
+    /* border: solid 1px blue; */
+    min-height: 450px;
 }
