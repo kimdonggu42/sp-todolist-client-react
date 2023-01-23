@@ -10,7 +10,8 @@
     border: none;
     border-bottom: solid 1px black;
     font-weight: 600;
-}:focus {
+}
+.todoInput:focus {
     outline: none;
     border-bottom: solid 2px black;
 }
@@ -27,6 +28,7 @@
     display: flex;
     list-style: none;
 }
+
 .tab {
     /* border: solid 1px blue; */
     width: 100px;
@@ -43,6 +45,10 @@
 .listCountDropDown {
     /* border: solid 1px red; */
     text-align: right;
+}
+
+.dropDown:focus {
+    outline: none;
 }
 
 .todoList {

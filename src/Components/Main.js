@@ -97,7 +97,7 @@ function Main() {
                     })}
                 </ul>
                 <div className="listCountDropDown">
-                    <select type="number" value={limit} onChange={(e) => setLimit(Number(e.target.value))}>
+                    <select className="dropDown" type="number" value={limit} onChange={(e) => setLimit(Number(e.target.value))}>
                         <option value="5">5개씩</option>
                         <option value="10">10개씩</option>
                         <option value="20">20개씩</option>
@@ -146,7 +146,14 @@ function Main() {
                     </ul>
                 )}
             {/* 페이지네이션 */}
-            <Pagenation total={todoData.length} limit={limit} page={page} setPage={setPage} />
+            <Pagenation allPageLength={todoData.length}
+                completePageLength={todoData.filter((value) => checkedItems.includes(value.id)).length}
+                incompletePageLength={todoData.filter((value) => !checkedItems.includes(value.id)).length}
+                limit={limit}
+                page={page}
+                setPage={setPage}
+                currentTab={currentTab}
+            />
         </main>
     );
 
