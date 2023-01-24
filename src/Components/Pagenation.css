@@ -1,5 +1,6 @@
 .pagenation {
     /* border: 1px solid red; */
+    margin-top: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -19,7 +20,7 @@
 .pageFocused {
     border-radius: 3px;
     background-color: #f9f9f9;
-    border: 1px solid #dcdcdc;
+    border: 1px solid black;
 }
 
 button:hover {

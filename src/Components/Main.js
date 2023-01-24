@@ -13,9 +13,9 @@ function Main() {
 
     // 메뉴 리스트 조건부 렌더링 배열 리스트
     const menuArr = [
-        { name: 'ALL' },
-        { name: 'Complete' },
-        { name: 'Incomplete' },
+        { name: '전체' },
+        { name: '완료' },
+        { name: '미완료' },
     ];
     // 메뉴 리스트 조건부 렌더링 이벤트 핸들러
     const selectMenuHandler = (index) => {

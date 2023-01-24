@@ -1,8 +1,11 @@
 .todoListContainer {
-    /* border: solid 1px red; */
+    background-color: #f9f9f9;
+    border-radius: 20px;
     display: flex;
-    margin: 20px 0px 20px 0px;
+    margin: 10px 0px 10px 0px;
     font-weight: 600;
+    height: 80px;
+    padding: 10px 10px 10px 10px;
 }
 
 .clearTodoContent {
@@ -10,8 +13,7 @@
 }
 
 .checkTodo {
-    flex: 0.5 0 0;
-    text-align: left;
+    flex: 0.5;
     margin: auto;
     padding-left: 5px;
 }
@@ -62,11 +64,16 @@
     transform: rotate(45deg);
 }
 
+.contentWrapper {
+    display: flex;
+    flex-direction: column;
+    flex: 8.5;
+}
+
 .editTodoContent {
-    flex: 9 0 0;
-    margin: auto;
-    padding-left: 10px;
-    padding: 10px 5px 10px 5px;
+    flex: 8;
+    text-align: left;
+    padding: 0px 5px 0px 5px;
     border: none;
     border-bottom: solid 1px black;
     font-weight: 600;
@@ -76,29 +83,34 @@
     outline: none;
 }
 
-.clearTodoContent>.todocontent {
-    color: gray;
+.clearTodoContent>.contentWrapper>.todocontent {
     text-decoration: line-through;
 }
 
 .todocontent {
-    flex: 9 0 0;
-    margin: auto;
-    padding-left: 10px;
+    display: flex;
+    align-items: center;
+    flex: 8;
+    text-align: left;
+    padding: 0px 15px 0px 15px;
 }
 
 .inputDate {
-    flex: 2 0 0;
-    margin: auto;
-    text-align: center;
-    font-size: 15px;
+    flex: 2;
+    font-size: 14px;
+    text-align: right;
+    padding-right: 10px;
+}
+
+.buttonWrapper {
+    display: flex;
+    flex-direction: column;
+    flex: 0.5;
 }
 
 .complete {
-    flex: 0.5 0 0;
     text-align: center;
     margin: auto;
-    padding-right: 5px;
 }
 
 .completeButton {
@@ -108,10 +120,8 @@
 }
 
 .edit {
-    flex: 0.5 0 0;
     text-align: center;
     margin: auto;
-    padding-right: 5px;
 }
 
 .editButton {
@@ -121,7 +131,6 @@
 }
 
 .delete {
-    flex: 0.5 0 0;
     text-align: center;
     margin: auto;
 }

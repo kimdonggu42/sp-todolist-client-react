@@ -5,7 +5,7 @@ function Header() {
     return (
         <header>
             <div className='title'>
-                T I T L E
+                TODO LIST
             </div>
         </header>
     );
