@@ -1,8 +1,17 @@
+header {
+    display: flex;
+}
+
 .title {
     /* border: 1px solid red; */
-    margin-bottom: 50px;;
+    margin-bottom: 40px;
     width: 100%;
     font-size: 40px;
     color: #46554a;
     font-weight: bolder;
+}
+
+.sideBarButton {
+    height: 15px;
+    margin-top: 16px;
 }

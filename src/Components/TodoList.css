@@ -2,7 +2,7 @@
     display: flex;
     /* margin: 50px 0px 100px 0px; */
     padding: 10px 0px 10px 0px;
-    height: 70px;
+    min-height: 70px;
     border-bottom: 0.5px solid lightgray;
 }
 
@@ -152,12 +152,13 @@
 }
 
 .modalView {
-    border-radius: 5px;
+    border-radius: 10px;
     background-color: white;
     width: 350px;
     height: 190px;
     color: black;
     font-weight: 600;
+    box-shadow: 0 0 20px rgba(0,0,0,0.19), 0 10px 10px rgba(0,0,0,0.10);
 }
 
 .warningIcon {
@@ -208,4 +209,14 @@
 
 .deleteButton:active {
     background-color: #d33031;
+}
+
+/* 최소 너비 550부터 아래 내용 적용 */
+@media screen and (min-width: 550px) {
+    .checkTodo {
+        flex: 0.6;
+    }
+    .contentWrapper {
+        flex: 16;
+    }
 }

@@ -1,10 +1,10 @@
-import './Header.css';
+import './TodayHeader.css';
 import { useState } from 'react';
 import SideBar from './SideBar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 
-function Header() {
+function TomorrowHeader() {
     const [isOpen, setIsOpen] = useState(false);
 
     const sideBarHandle = () => {
@@ -13,8 +13,13 @@ function Header() {
 
     return (
         <header>
-            <div className='title'>
-                TODO LIST
+            <div className='titleWrapper'>
+                <div className='today_Title'>
+                    TODO LIST
+                </div>
+                <div className='today_subTitle'>
+                    내일 할 일
+                </div>
             </div>
             <div className='sideBarButton' onClick={sideBarHandle}>
                 <FontAwesomeIcon icon={faBars} size="lg" />
@@ -24,4 +29,4 @@ function Header() {
     );
 }
 
-export default Header;
+export default TomorrowHeader;

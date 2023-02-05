@@ -1,10 +1,14 @@
 import React, { useState, useEffect, useRef } from "react";
 import './TodoList.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrashCan } from "@fortawesome/free-regular-svg-icons";
+import { faSquareCheck } from "@fortawesome/free-regular-svg-icons";
+import { faPenToSquare } from "@fortawesome/free-regular-svg-icons";
 
 function TodoList({ list, handleCheckChange, checkedItems, todoData, setTodoData }) {
     const [edit, setEdit] = useState(false);  // 수정 모드 상태
     const [newContent, setNewContent] = useState(list.content);  // 수정한 값이 담길 변수
-    const [isOpen, setIsOpen] = useState(false);  //
+    const [isOpen, setIsOpen] = useState(false);
 
     const editInputRef = useRef(null);
     // edit 버튼을 클릭했을 때, ref를 props로 넘겨준 input 속성에 focus된다.
@@ -68,21 +72,21 @@ function TodoList({ list, handleCheckChange, checkedItems, todoData, setTodoData
                     <input className="editTodoContent" type='text' value={newContent} ref={editInputRef} onChange={onChangeEditInput}></input>
                     : <div className="todocontent">{list.content}</div>}
                 {/* 데이터 등록 날짜 */}
-                <div className="inputDate">{new Date(list.createdAt).toLocaleDateString()}</ div>
+                <div className="inputDate">{list.createdAt}</ div>
             </div>
             {/* todo 수정 버튼 : 평소(수정 상태가 아닐 때)에는 수정 버튼을 띄우고, 클릭 시 수정 완료 버튼을 띄운다. &&  체크된 todo라면 수정 버튼을 숨긴다. */}
             {!checkedItems.includes(list.id) ?
                 (edit ?
                     <div className="complete">
-                        <button className="completeButton" onClick={onClickSubmitButton}><i className="fa-regular fa-square-check"></i></button>
+                        <button className="completeButton" onClick={onClickSubmitButton}><FontAwesomeIcon icon={faSquareCheck} /></button>
                     </div>
                     : <div className="edit">
-                        <button className="editButton" onClick={onClickEditButton}><i className="fa-regular fa-pen-to-square"></i></button>
+                        <button className="editButton" onClick={onClickEditButton}><FontAwesomeIcon icon={faPenToSquare} /></button>
                     </div>)
                 : null}
             {/* todo 삭제 모달 팝업 버튼 */}
             <div className="delete">
-                <button className="popUpDeleteModal" onClick={openModalHandler}><i className="fa-regular fa-trash-can"></i></button>
+                <button className="popUpDeleteModal" onClick={openModalHandler}><FontAwesomeIcon icon={faTrashCan} /></button>
                 {isOpen ?
                     <div className="modalBackdrop">
                         <div className="modalView" onClick={stopEvent}>

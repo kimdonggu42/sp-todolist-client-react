@@ -5,7 +5,7 @@ import dummyData from "../dummyData";
 import TodoList from "./TodoList";
 import Pagenation from "./Pagenation";
 
-function Main() {
+function TomorrowMain() {
     const [todoData, setTodoData] = useState(() => JSON.parse(window.localStorage.getItem('localData')) || dummyData);
     const [checkedItems, setCheckedItems] = useState(() => JSON.parse(window.localStorage.getItem('localCheckedData')) || []);
     const [todoText, setTodoText] = useState('');
@@ -57,7 +57,6 @@ function Main() {
         setTodoText(event.target.value)
     };
 
-    // 새로운 todoData 등록 시 date input 상태 관리
     const handleChangeTodoDate = (event) => {
         setTodoDate(event.target.value)
     };
@@ -77,7 +76,7 @@ function Main() {
             setCheckedItems(checkedItems.filter((value) => value !== id));
         }
     };
-
+    
     // 모달 오픈 이벤트 핸들러
     const openModalHandler = () => {
         setIsOpen(!isOpen)
@@ -87,6 +86,15 @@ function Main() {
     const stopEvent = (event) => {
         event.stopPropagation()
     };
+
+    // 오늘 날짜를 구해서 dateFormat 변수에 저장
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = today.getMonth() + 1;
+    const day = today.getDate() + 1;
+    const dateFormat = year + "-" + (("00" + month.toString()).slice(-2)) + "-" + (("00" + day.toString()).slice(-2));
+    // 투두데이터 중 내일 날짜의 투두만 보이도록 필터링한 변수
+    const tomorrowTodoData = todoData.filter((value) => value.createdAt === dateFormat);
 
     return (
         <main>
@@ -129,14 +137,14 @@ function Main() {
             <div className="todoCount">
                 {currentTab === 0 ?
                     <div className="todoNum">
-                        {todoData.length} 개
+                        {tomorrowTodoData.length} 개
                     </div>
                     : (currentTab === 1 ?
                         <div className="todoNum">
-                            {todoData.filter((value) => checkedItems.includes(value.id)).length} 개
+                            {tomorrowTodoData.filter((value) => checkedItems.includes(value.id)).length} 개
                         </div>
                         : <div className="todoNum">
-                            {todoData.filter((value) => !checkedItems.includes(value.id)).length} 개
+                            {tomorrowTodoData.filter((value) => !checkedItems.includes(value.id)).length} 개
                         </div>)}
                 <div className="listCountDropDown">
                     <select className="dropDown" type="number" value={limit} onChange={(e) => setLimit(Number(e.target.value))}>
@@ -150,7 +158,7 @@ function Main() {
             {/* 조건별 리스트 목록 */}
             {currentTab === 0 ?
                 <ul className="todoList">
-                    {todoData.slice(offset, offset + limit).map((value) =>
+                    {tomorrowTodoData.slice(offset, offset + limit).map((value) =>
                         <TodoList
                             list={value}
                             key={value.id}
@@ -162,7 +170,7 @@ function Main() {
                 </ul>
                 : (currentTab === 1 ?
                     <ul className="todoList">
-                        {todoData.filter((value) => checkedItems.includes(value.id)).slice(offset, offset + limit).map((value) =>
+                        {tomorrowTodoData.filter((value) => checkedItems.includes(value.id)).slice(offset, offset + limit).map((value) =>
                             <TodoList
                                 list={value}
                                 key={value.id}
@@ -173,7 +181,7 @@ function Main() {
                             />)}
                     </ul>
                     : <ul className="todoList">
-                        {todoData.filter((value) => !checkedItems.includes(value.id)).slice(offset, offset + limit).map((value) =>
+                        {tomorrowTodoData.filter((value) => !checkedItems.includes(value.id)).slice(offset, offset + limit).map((value) =>
                             <TodoList
                                 list={value}
                                 key={value.id}
@@ -186,9 +194,9 @@ function Main() {
                 )}
             {/* 페이지네이션 */}
             <Pagenation
-                allPageLength={todoData.length}
-                completePageLength={todoData.filter((value) => checkedItems.includes(value.id)).length}
-                incompletePageLength={todoData.filter((value) => !checkedItems.includes(value.id)).length}
+                allPageLength={tomorrowTodoData.length}
+                completePageLength={tomorrowTodoData.filter((value) => checkedItems.includes(value.id)).length}
+                incompletePageLength={tomorrowTodoData.filter((value) => !checkedItems.includes(value.id)).length}
                 limit={limit}
                 page={page}
                 setPage={setPage}
@@ -199,4 +207,4 @@ function Main() {
 
 }
 
-export default Main;
+export default TomorrowMain;

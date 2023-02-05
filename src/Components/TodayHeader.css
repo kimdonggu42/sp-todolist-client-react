@@ -1,0 +1,29 @@
+header {
+    display: flex;
+}
+
+.titleWrapper {
+    display: flex;
+    flex-direction: column;
+    flex: 20
+}
+
+.today_Title {
+    /* border: 1px solid red; */
+    width: 100%;
+    font-size: 40px;
+    color: #46554a;
+    font-weight: bolder;
+}
+
+.today_subTitle {
+    margin-bottom: 14.5px;
+    font-size: 20px;
+    color: #46554a;
+    margin-left: 4px;
+    font-weight: 500;
+}
+
+.sideBarButton {
+    flex: 1;
+}

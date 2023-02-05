@@ -1,7 +1,7 @@
 const dummyData = [
     {
         id: 1,
-        createdAt: "1996-10-16T01:02:17Z",
+        createdAt: "2022-10-20T01:02:17Z",
         content: "더미 데이터 1",
     },
     {
