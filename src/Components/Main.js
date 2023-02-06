@@ -1,17 +1,41 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import './Main.css';
 import uuid from "react-uuid";
-import dummyData from "../dummyData";
+import axios from "axios";
 import TodoList from "./TodoList";
 import Pagenation from "./Pagenation";
 
 function Main() {
-    const [todoData, setTodoData] = useState(() => JSON.parse(window.localStorage.getItem('localData')) || dummyData);
+    const [todoData, setTodoData] = useState([]);
     const [checkedItems, setCheckedItems] = useState(() => JSON.parse(window.localStorage.getItem('localCheckedData')) || []);
     const [todoText, setTodoText] = useState('');
     const [todoDate, setTodoDate] = useState('');
     const [currentTab, setCurrentTab] = useState(0);
     const [isOpen, setIsOpen] = useState(false);
+
+    // Get
+    const getTodoData = async () => {
+        const res = await axios.get('http://localhost:3001/todos');
+        setTodoData(res.data);
+    };
+    useEffect(() => {
+        getTodoData();
+    }, []);
+
+    // Post
+    const addTodoText = async () => {
+        const newTodoText = {
+            id: uuid(),
+            createdAt: todoDate,
+            content: todoText,
+            check: checkedItems
+        };
+        if (todoText) {  // input에 입력값이 없으면 새로운 todo를 추가하지 못하게 함
+            const res = await axios.post('http://localhost:3001/todos', newTodoText);
+            getTodoData(res.data);
+            return setTodoText('');
+        };
+    };
 
     // 메뉴 리스트 조건부 렌더링 배열 리스트
     const menuArr = [
@@ -32,25 +56,8 @@ function Main() {
     const offset = (page - 1) * limit;
 
     useEffect(() => {
-        window.localStorage.setItem('localData', JSON.stringify(todoData))
-    }, [todoData])
-
-    useEffect(() => {
         window.localStorage.setItem('localCheckedData', JSON.stringify(checkedItems))
     }, [checkedItems])
-
-    // 새로운 todo 추가하는 이벤트 핸들러
-    const addTodoText = () => {
-        const newTodoText = {
-            id: uuid(),
-            createdAt: todoDate,
-            content: todoText,
-        };
-        if (todoText) {  // input에 입력값이 없으면 새로운 todo를 추가하지 못하게 함
-            setTodoData([newTodoText, ...todoData]);
-            return setTodoText('');
-        };
-    };
 
     // 새로운 todoData 등록 시 input 상태 관리
     const handleChangeTodoText = (event) => {
@@ -88,6 +95,9 @@ function Main() {
         event.stopPropagation()
     };
 
+    // 새로 추가하는 데이터가 배열 앞에서 부터 추가되도록 배열을 뒤집어서 불러옴
+    const reTodoData = todoData.slice().reverse();
+
     return (
         <main>
             {/* 리스트 목록 선택 탭 및 리스트 노출 개수 선택 드롭다운 */}
@@ -102,7 +112,7 @@ function Main() {
                     })}
                 </ul>
                 <div className="addTodo">
-                    <button className="addModalOpenButton" onClick={openModalHandler}>Add</button>
+                    <button className="addModalOpenButton" onClick={openModalHandler}>ADD</button>
                     {isOpen ?
                         <div className="addTodoModalBackdrop">
                             <div className="addTodoModalView" onClick={stopEvent}>
@@ -150,37 +160,34 @@ function Main() {
             {/* 조건별 리스트 목록 */}
             {currentTab === 0 ?
                 <ul className="todoList">
-                    {todoData.slice(offset, offset + limit).map((value) =>
+                    {reTodoData.slice(offset, offset + limit).map((value) =>
                         <TodoList
                             list={value}
                             key={value.id}
                             handleCheckChange={handleCheckChange}
                             checkedItems={checkedItems}
-                            todoData={todoData}
-                            setTodoData={setTodoData}
+                            getTodoData={getTodoData}
                         />)}
                 </ul>
                 : (currentTab === 1 ?
                     <ul className="todoList">
-                        {todoData.filter((value) => checkedItems.includes(value.id)).slice(offset, offset + limit).map((value) =>
+                        {reTodoData.filter((value) => checkedItems.includes(value.id)).slice(offset, offset + limit).map((value) =>
                             <TodoList
                                 list={value}
                                 key={value.id}
                                 handleCheckChange={handleCheckChange}
                                 checkedItems={checkedItems}
-                                todoData={todoData}
-                                setTodoData={setTodoData}
+                                getTodoData={getTodoData}
                             />)}
                     </ul>
                     : <ul className="todoList">
-                        {todoData.filter((value) => !checkedItems.includes(value.id)).slice(offset, offset + limit).map((value) =>
+                        {reTodoData.filter((value) => !checkedItems.includes(value.id)).slice(offset, offset + limit).map((value) =>
                             <TodoList
                                 list={value}
                                 key={value.id}
                                 handleCheckChange={handleCheckChange}
                                 checkedItems={checkedItems}
-                                todoData={todoData}
-                                setTodoData={setTodoData}
+                                getTodoData={getTodoData}
                             />)}
                     </ul>
                 )}

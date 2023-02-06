@@ -9,9 +9,11 @@ header {
     font-size: 40px;
     color: #46554a;
     font-weight: bolder;
+    flex: 25;
 }
 
 .sideBarButton {
     height: 15px;
-    margin-top: 16px;
+    margin: 16px 5px 0 0;
+    flex: 1;
 }

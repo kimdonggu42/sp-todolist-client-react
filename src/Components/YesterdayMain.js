@@ -1,17 +1,40 @@
 import React, { useState, useEffect } from "react";
 import './Main.css';
 import uuid from "react-uuid";
-import dummyData from "../dummyData";
+import axios from "axios";
 import TodoList from "./TodoList";
 import Pagenation from "./Pagenation";
 
 function YesterdayMain() {
-    const [todoData, setTodoData] = useState(() => JSON.parse(window.localStorage.getItem('localData')) || dummyData);
+    const [todoData, setTodoData] = useState([]);
     const [checkedItems, setCheckedItems] = useState(() => JSON.parse(window.localStorage.getItem('localCheckedData')) || []);
     const [todoText, setTodoText] = useState('');
     const [todoDate, setTodoDate] = useState('');
     const [currentTab, setCurrentTab] = useState(0);
     const [isOpen, setIsOpen] = useState(false);
+
+    // Get
+    const getTodoData = async () => {
+        const res = await axios.get('http://localhost:3001/todos');
+        setTodoData(res.data);
+    };
+    useEffect(() => {
+        getTodoData();
+    }, []);
+
+    // Post
+    const addTodoText = async () => {
+        const newTodoText = {
+            id: uuid(),
+            createdAt: todoDate,
+            content: todoText,
+        };
+        if (todoText) {  // input에 입력값이 없으면 새로운 todo를 추가하지 못하게 함
+            const res = await axios.post('http://localhost:3001/todos', newTodoText);
+            getTodoData(res.data);
+            return setTodoText('');
+        };
+    };
 
     // 메뉴 리스트 조건부 렌더링 배열 리스트
     const menuArr = [
@@ -32,25 +55,8 @@ function YesterdayMain() {
     const offset = (page - 1) * limit;
 
     useEffect(() => {
-        window.localStorage.setItem('localData', JSON.stringify(todoData))
-    }, [todoData])
-
-    useEffect(() => {
         window.localStorage.setItem('localCheckedData', JSON.stringify(checkedItems))
     }, [checkedItems])
-
-    // 새로운 todo 추가하는 이벤트 핸들러
-    const addTodoText = () => {
-        const newTodoText = {
-            id: uuid(),
-            createdAt: todoDate,
-            content: todoText,
-        };
-        if (todoText) {  // input에 입력값이 없으면 새로운 todo를 추가하지 못하게 함
-            setTodoData([newTodoText, ...todoData]);
-            return setTodoText('');
-        };
-    };
 
     // 새로운 todoData 등록 시 input 상태 관리
     const handleChangeTodoText = (event) => {
@@ -76,7 +82,7 @@ function YesterdayMain() {
             setCheckedItems(checkedItems.filter((value) => value !== id));
         }
     };
-    
+
     // 모달 오픈 이벤트 핸들러
     const openModalHandler = () => {
         setIsOpen(!isOpen)
@@ -93,8 +99,8 @@ function YesterdayMain() {
     const month = today.getMonth() + 1;
     const day = today.getDate() - 1;
     const dateFormat = year + "-" + (("00" + month.toString()).slice(-2)) + "-" + (("00" + day.toString()).slice(-2));
-    // 투두데이터 중 어제 날짜의 투두만 보이도록 필터링한 변수
-    const yesterdayTodoData = todoData.filter((value) => value.createdAt === dateFormat);
+    // 투두데이터 중 어제 날짜의 투두만 보이도록 필터링한 변수 && 배열 뒤집음
+    const yesterdayTodoData = todoData.filter((value) => value.createdAt === dateFormat).slice().reverse();
 
     return (
         <main>
@@ -110,7 +116,7 @@ function YesterdayMain() {
                     })}
                 </ul>
                 <div className="addTodo">
-                    <button className="addModalOpenButton" onClick={openModalHandler}>Add</button>
+                    <button className="addModalOpenButton" onClick={openModalHandler}>ADD</button>
                     {isOpen ?
                         <div className="addTodoModalBackdrop">
                             <div className="addTodoModalView" onClick={stopEvent}>
@@ -164,8 +170,7 @@ function YesterdayMain() {
                             key={value.id}
                             handleCheckChange={handleCheckChange}
                             checkedItems={checkedItems}
-                            todoData={todoData}
-                            setTodoData={setTodoData}
+                            getTodoData={getTodoData}
                         />)}
                 </ul>
                 : (currentTab === 1 ?
@@ -176,8 +181,7 @@ function YesterdayMain() {
                                 key={value.id}
                                 handleCheckChange={handleCheckChange}
                                 checkedItems={checkedItems}
-                                todoData={todoData}
-                                setTodoData={setTodoData}
+                                getTodoData={getTodoData}
                             />)}
                     </ul>
                     : <ul className="todoList">
@@ -187,8 +191,7 @@ function YesterdayMain() {
                                 key={value.id}
                                 handleCheckChange={handleCheckChange}
                                 checkedItems={checkedItems}
-                                todoData={todoData}
-                                setTodoData={setTodoData}
+                                getTodoData={getTodoData}
                             />)}
                     </ul>
                 )}

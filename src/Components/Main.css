@@ -86,9 +86,6 @@
     outline: none;
     border: solid 1px grey;
 }
-.todoDate:hover {
-    border: solid 1px grey;
-}
 
 .inputContainer {
     /* border: solid 1px red; */
@@ -111,9 +108,6 @@
     outline: none;
     border: solid 1px grey;
 }
-.todoInput:hover {
-    border: solid 1px grey;
-}
 
 .addButton+.addCancelButton {
     margin-left: 20px;
@@ -125,12 +119,13 @@
 
 .addButton,
 .addCancelButton {
+    font-weight: 500;
     margin-top: 12px;
-    width: 60px;
-    height: 30px;
+    width: 70px;
+    height: 27px;
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 7px;
     text-decoration: none;
 }
 
@@ -138,22 +133,20 @@
     background-color: #3184d5;
 }
 .addButton:hover {
-    background-color: #64AAFF;
     text-decoration: none;
 }
 .addButton:active {
-    background-color: #3184d5;
+    background-color: #64AAFF;
 }
 
 .addCancelButton {
     background-color: #d33031;
 }
 .addCancelButton:hover {
-    background-color: #E68282;
     text-decoration: none;
 }
 .addCancelButton:active {
-    background-color: #d33031;
+    background-color: #E68282;
 }
 
 .todoCount {

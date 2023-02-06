@@ -5,7 +5,7 @@ header {
 .titleWrapper {
     display: flex;
     flex-direction: column;
-    flex: 20
+    flex: 25
 }
 
 .today_Title {

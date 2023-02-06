@@ -65,7 +65,7 @@
 .contentWrapper {
     display: flex;
     flex-direction: column;
-    flex: 8;
+    flex: 7.5;
 }
 
 .editTodoContent {
@@ -177,11 +177,12 @@
 
 .cancelButton,
 .deleteButton {
-    width: 60px;
-    height: 30px;
+    font-weight: 500;
+    width: 70px;
+    height: 27px;
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 7px;
     text-decoration: none;
 }
 
@@ -190,12 +191,11 @@
 }
 
 .cancelButton:hover {
-    background-color: #64AAFF;
     text-decoration: none;
 }
 
 .cancelButton:active {
-    background-color: #3184d5;
+    background-color: #64AAFF;
 }
 
 .deleteButton {
@@ -203,12 +203,11 @@
 }
 
 .deleteButton:hover {
-    background-color: #E68282;
     text-decoration: none;
 }
 
 .deleteButton:active {
-    background-color: #d33031;
+    background-color: #E68282;
 }
 
 /* 최소 너비 550부터 아래 내용 적용 */

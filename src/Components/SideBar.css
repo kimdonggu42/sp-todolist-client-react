@@ -1,10 +1,21 @@
+.back {
+    display: flex;
+    justify-content: center;
+    position: fixed;
+    z-index: 999;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
 .displayNone {
     z-index: 5;
     background-color: white;
     height: 100%;
-    width: 60vw;
-    right: -60vw;
-    top: 0;
+    width: 200px;
+    right: -200px;
     position: fixed;
     transition: 0.2s ease;
     box-shadow: 0 0 20px rgba(0,0,0,0.19), 0 10px 10px rgba(0,0,0,0.10);
@@ -16,31 +27,27 @@
 }
 
 .closeButton {
-    float: left;
+    float: right;
     border: none;
     background-color: transparent;
-    margin: 20px 0px 0px 10px;
+    margin: 33.5px 10.5px 0 0;
     font-size: 20px;
-    width: 25px;
-    height: 25px;
 }
 
 .closeButton:hover {
     text-decoration: none;
-    background-color: lightgray;
-    border-radius: 6px;
 }
 
 .sideList {
-    margin: 70px 15px 0px 15px;
+    margin-top: 97px;
     list-style: none;
 }
 
 .sideList>li {
-    height: 40px;
-    border-radius: 10px;
-    line-height: 40px;
-    margin-bottom: 10px;
+    padding-left: 15px;
+    height: 50px;
+    line-height: 50px;
+    color: #282828;
 }
 
 .sideList>li:hover {
@@ -48,6 +55,7 @@
 }
 
 a {
+    display: block;
     text-decoration: none;
     color: inherit;
     font-weight: 500;
@@ -55,15 +63,36 @@ a {
 }
 
 .icon {
-    margin-right: 10px;
+    margin-right: 15px;
 }
 
-.back {
-    position: fixed;
-    z-index: 999;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    background-color: rgba(0, 0, 0, 0.2);
+/* 최소 너비 550부터 아래 내용 적용 */
+@media screen and (min-width: 550px) {
+    .displayNone {
+        height: 270px;
+        width: 700px;
+        top: -700px;
+        position: relative;
+    }
+
+    .open {
+        top: 0;
+        transition: 0.2s ease;
+    }
+
+    .closeButton {
+        margin: 33.5px -5px 0 0;
+    }
+
+    .sideList {
+        margin-top: 70px;
+    }
+
+    .sideList>li {
+        padding-left: 20px;
+    }
+
+    .icon {
+        margin-right: 20px;
+    }
 }
