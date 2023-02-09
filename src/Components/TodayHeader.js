@@ -1,6 +1,6 @@
-import './TodayHeader.css';
-import { useState } from 'react';
+import * as Header from "./Header";
 import SideBar from './SideBar';
+import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 
@@ -12,20 +12,15 @@ function TodayHeader() {
     }
 
     return (
-        <header>
-            <div className='titleWrapper'>
-                <div className='today_Title'>
-                    TODO LIST
-                </div>
-                <div className='today_subTitle'>
-                    오늘 할 일
-                </div>
+        <Header.HeaderContainer>
+            <div className='title'>
+                오늘 할 일
             </div>
-            <div className='sideBarButton' onClick={sideBarHandle}>
+            <Header.SideBarButton onClick={sideBarHandle}>
                 <FontAwesomeIcon icon={faBars} size="lg" />
-            </div>
+            </Header.SideBarButton>
             <SideBar isOpen={isOpen} setIsOpen={setIsOpen} />
-        </header>
+        </Header.HeaderContainer>
     );
 }
 

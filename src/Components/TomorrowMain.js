@@ -1,17 +1,19 @@
-import { useState, useEffect } from "react";
-import './Main.css';
-import uuid from "react-uuid";
-import axios from "axios";
+import * as Main from "./Main";
 import TodoList from "./TodoList";
 import Pagenation from "./Pagenation";
+import uuid from "react-uuid";
+import axios from "axios";
+import { useState, useEffect } from "react";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
 function TomorrowMain() {
-    const [todoData, setTodoData] = useState([]);
+    const [todoData, setTodoData] = useState([]);  // 전체 데이터가 담겨 있는 변수
     const [checkedItems, setCheckedItems] = useState(() => JSON.parse(window.localStorage.getItem('localCheckedData')) || []);
-    const [todoText, setTodoText] = useState('');
-    const [todoDate, setTodoDate] = useState('');
-    const [currentTab, setCurrentTab] = useState(0);
-    const [isOpen, setIsOpen] = useState(false);
+    const [todoText, setTodoText] = useState('');  // 작성한 텍스트 값이 담긴 변수
+    const [todoDate, setTodoDate] = useState('');  // 선택한 날짜 값이 담긴 변수
+    const [currentTab, setCurrentTab] = useState(0);  // 탭 이동 상태 관리 변수
+    const [addModalOpen, setAddModalOpen] = useState(false);  // 투두 추가 모달 오픈 상태 관리 변수
 
     // Get
     const getTodoData = async () => {
@@ -22,12 +24,16 @@ function TomorrowMain() {
         getTodoData();
     }, []);
 
+    useEffect(() => {
+        window.localStorage.setItem('localCheckedData', JSON.stringify(checkedItems));
+    }, [checkedItems]);
+
     // Post
     const addTodoText = async () => {
         const newTodoText = {
             id: uuid(),
             createdAt: todoDate,
-            content: todoText,
+            content: todoText
         };
         if (todoText) {  // input에 입력값이 없으면 새로운 todo를 추가하지 못하게 함
             const res = await axios.post('http://localhost:3001/todos', newTodoText);
@@ -36,11 +42,31 @@ function TomorrowMain() {
         };
     };
 
+    // 투두 추가 모달 오픈 이벤트 핸들러
+    const openModalHandler = () => {
+        setAddModalOpen(!addModalOpen);
+    };
+
+    // 투두 추가 모드 시 입력되는 텍스트 input 상태 관리
+    const handleChangeTodoText = (event) => {
+        setTodoText(event.target.value)
+    };
+
+    // 투두 추가 모드 시 입력되는 날짜 input 상태 관리
+    const handleChangeTodoDate = (event) => {
+        setTodoDate(event.target.value)
+    };
+
+    // 이벤트 버블링 방지
+    const stopEvent = (event) => {
+        event.stopPropagation();
+    };
+
     // 메뉴 리스트 조건부 렌더링 배열 리스트
     const menuArr = [
         { name: '전체' },
         { name: '완료' },
-        { name: '미완료' },
+        { name: '미완료' }
     ];
     // 메뉴 리스트 조건부 렌더링 이벤트 핸들러
     const selectMenuHandler = (index) => {
@@ -53,19 +79,6 @@ function TomorrowMain() {
     const [page, setPage] = useState(1);  // 기본값: 1페이지부터 노출
     // 각 페이지에서 첫 데이터의 위치(index) 계산
     const offset = (page - 1) * limit;
-
-    useEffect(() => {
-        window.localStorage.setItem('localCheckedData', JSON.stringify(checkedItems))
-    }, [checkedItems])
-
-    // 새로운 todoData 등록 시 input 상태 관리
-    const handleChangeTodoText = (event) => {
-        setTodoText(event.target.value)
-    };
-
-    const handleChangeTodoDate = (event) => {
-        setTodoDate(event.target.value)
-    };
 
     // Enter 키 입력 시에도 동일하게 addTodoText 이벤트 핸들러 동작하게 하는 이벤트 핸들러
     // const handleKeyupTodoText = (event) => {
@@ -83,16 +96,6 @@ function TomorrowMain() {
         }
     };
 
-    // 모달 오픈 이벤트 핸들러
-    const openModalHandler = () => {
-        setIsOpen(!isOpen)
-    };
-
-    // 이벤트 버블링 방지
-    const stopEvent = (event) => {
-        event.stopPropagation()
-    };
-
     // 오늘 날짜를 구해서 dateFormat 변수에 저장
     const today = new Date();
     const year = today.getFullYear();
@@ -105,8 +108,8 @@ function TomorrowMain() {
     return (
         <main>
             {/* 리스트 목록 선택 탭 및 리스트 노출 개수 선택 드롭다운 */}
-            <div className="selectContainer">
-                <ul className="listTab">
+            <Main.SelectContainer>
+                <Main.ListTab>
                     {menuArr.map((tab, index) => {
                         return (
                             <li key={index} className={currentTab === index ? 'tab focused' : 'tab'} onClick={() => selectMenuHandler(index)}>
@@ -114,33 +117,31 @@ function TomorrowMain() {
                             </li>
                         )
                     })}
-                </ul>
-                <div className="addTodo">
-                    <button className="addModalOpenButton" onClick={openModalHandler}>ADD</button>
-                    {isOpen ?
-                        <div className="addTodoModalBackdrop">
-                            <div className="addTodoModalView" onClick={stopEvent}>
-                                <div className="addTodoTitle">
+                </Main.ListTab>
+                <div className="add">
+                    <Main.PopUpAddModalButton onClick={openModalHandler}><FontAwesomeIcon icon={faPlus} size="lg" /></Main.PopUpAddModalButton>
+                    {addModalOpen ?
+                        <Main.AddModalBackdrop>
+                            <Main.AddModalView onClick={stopEvent}>
+                                <div className="addModalTitle">
                                     Add Todo
                                 </div>
-                                {/* 투두날짜 입력 창 */}
-                                <div className="inputModalDate">
-                                    <input className="todoDate" type='date' onChange={handleChangeTodoDate} />
-                                </div>
-                                {/* 투두데이터 입력 창 */}
-                                <div className="inputContainer">
-                                    <input className="todoInput" type='text' value={todoText} placeholder="할 일을 입력해주세요" onChange={handleChangeTodoText} />
-                                </div>
-                                <div className="buttonContainer">
+                                <Main.AddModalDateArea>
+                                    <input className="addModalDateInput" type='date' onChange={handleChangeTodoDate} />
+                                </Main.AddModalDateArea>
+                                <Main.AddModalContentArea>
+                                    <input className="addModalContentInput" type='text' placeholder="할 일을 입력해주세요" onChange={handleChangeTodoText} />
+                                </Main.AddModalContentArea>
+                                <Main.AddModalButtonArea>
                                     <button className="addButton" onClick={() => { addTodoText(); openModalHandler(); }}>등록</button>
                                     <button className="addCancelButton" onClick={openModalHandler}>취소</button>
-                                </div>
-                            </div>
-                        </div>
+                                </Main.AddModalButtonArea>
+                            </Main.AddModalView>
+                        </Main.AddModalBackdrop>
                         : null}
                 </div>
-            </div>
-            <div className="todoCount">
+            </Main.SelectContainer>
+            <Main.TodoCount>
                 {currentTab === 0 ?
                     <div className="todoNum">
                         {tomorrowTodoData.length} 개
@@ -152,15 +153,15 @@ function TomorrowMain() {
                         : <div className="todoNum">
                             {tomorrowTodoData.filter((value) => !checkedItems.includes(value.id)).length} 개
                         </div>)}
-                <div className="listCountDropDown">
+                <Main.ListCountDropDown>
                     <select className="dropDown" type="number" value={limit} onChange={(e) => setLimit(Number(e.target.value))}>
                         <option value="5">5개씩</option>
                         <option value="10">10개씩</option>
                         <option value="20">20개씩</option>
                         <option value="30">30개씩</option>
                     </select>
-                </div>
-            </div>
+                </Main.ListCountDropDown>
+            </Main.TodoCount>
             {/* 조건별 리스트 목록 */}
             {currentTab === 0 ?
                 <ul className="todoList">
@@ -207,7 +208,6 @@ function TomorrowMain() {
             />
         </main>
     );
-
 }
 
 export default TomorrowMain;

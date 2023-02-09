@@ -1,5 +1,35 @@
-import React from "react";
-import './Pagenation.css'
+import styled from 'styled-components';
+
+const PageNum = styled.div`
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    /* 더블 클릭이나 드래그로 텍스트 선택 방지 */
+    user-select: none;
+
+    > .pageTab, .leftHandle, .rightHandle {
+        width: 20px;
+        height: 20px;
+        background-color: transparent;
+        border: none;
+        color: ${(props) => props.theme.text};
+    }
+
+    > .pageFocused {
+        border-radius: 3px;
+        background-color: #f9f9f9;
+        border: 1px solid black;
+        font-weight: 600;
+        color: black
+        
+    }
+
+    > button:hover {
+        text-decoration: underline;
+    }
+`;
 
 function Pagenation({ allPageLength, completePageLength, incompletePageLength, limit, page, setPage, currentTab }) {
     // 필요한 페이지 개수 === 총 데이터 수(allPageLength === todoData.length) / 페이지 당 표시할 데이터 수(limit === 10)
@@ -20,7 +50,7 @@ function Pagenation({ allPageLength, completePageLength, incompletePageLength, l
     return (
         <>
             {currentTab === 0 ?
-                <div className='pagenation'>
+                <PageNum>
                     {/* 왼쪽 버튼 클릭시 현재 페이지에서 1 페이지 이전 페이지로 이동하고, 현재 페이지가 1페이지가 되면 왼쪽 버튼은 비활성화 된다.*/}
                     {/* disabled -> 버튼 태그의 버튼 비활성화 속성 */}
                     <button className="leftHandle" onClick={prevPageHandler} disabled={page === 1}>
@@ -35,9 +65,9 @@ function Pagenation({ allPageLength, completePageLength, incompletePageLength, l
                     <button className="rightHandle" onClick={nextPageHandler} disabled={page === numAllPages}>
                         &gt;
                     </button>
-                </div>
+                </PageNum>
                 : (currentTab === 1 ?
-                    <div className='pagenation'>
+                    <PageNum>
                         <button className="leftHandle" onClick={prevPageHandler} disabled={page === 1}>
                             &lt;
                         </button>
@@ -49,8 +79,8 @@ function Pagenation({ allPageLength, completePageLength, incompletePageLength, l
                         <button className="rightHandle" onClick={nextPageHandler} disabled={page === numCompletePages}>
                             &gt;
                         </button>
-                    </div>
-                    : <div className='pagenation'>
+                    </PageNum>
+                    : <PageNum>
                         <button className="leftHandle" onClick={prevPageHandler} disabled={page === 1}>
                             &lt;
                         </button>
@@ -62,7 +92,7 @@ function Pagenation({ allPageLength, completePageLength, incompletePageLength, l
                         <button className="rightHandle" onClick={nextPageHandler} disabled={page === numIncompletePages}>
                             &gt;
                         </button>
-                    </div>)}
+                    </PageNum>)}
         </>
     );
 }
