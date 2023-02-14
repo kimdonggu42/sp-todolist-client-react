@@ -3,8 +3,9 @@ import SideBar from './SideBar';
 import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from "@fortawesome/free-solid-svg-icons";
+import { faSun, faMoon } from '@fortawesome/free-regular-svg-icons';
 
-function YesterdayHeader() {
+function YesterdayHeader({ isChange, changeMode }) {
     const [isOpen, setIsOpen] = useState(false);
 
     const sideBarHandle = () => {
@@ -16,6 +17,9 @@ function YesterdayHeader() {
             <div className='title'>
                 어제 한 일
             </div>
+            <Header.ModeChangeButton>
+                <FontAwesomeIcon icon={isChange ? faMoon : faSun} size="lg" onClick={changeMode} />
+            </Header.ModeChangeButton>
             <Header.SideBarButton onClick={sideBarHandle}>
                 <FontAwesomeIcon icon={faBars} size="lg" />
             </Header.SideBarButton>

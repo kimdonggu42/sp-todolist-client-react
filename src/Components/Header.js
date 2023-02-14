@@ -3,8 +3,7 @@ import SideBar from './SideBar';
 import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from "@fortawesome/free-solid-svg-icons";
-import { faLightbulb } from '@fortawesome/free-regular-svg-icons';
-import  {faLightbulb as solidFaLightbulb } from '@fortawesome/free-solid-svg-icons';
+import { faSun, faMoon } from '@fortawesome/free-regular-svg-icons';
 
 
 export const HeaderContainer = styled.div`
@@ -54,7 +53,7 @@ function Header({ isChange, changeMode }) {
                 TODO LIST
             </div>
             <ModeChangeButton>
-                <FontAwesomeIcon icon={isChange ? solidFaLightbulb : faLightbulb} size="lg" onClick={changeMode} />
+                <FontAwesomeIcon icon={isChange ? faMoon : faSun} size="lg" onClick={changeMode} />
             </ModeChangeButton>
             <SideBarButton onClick={sideBarHandle}>
                 <FontAwesomeIcon icon={faBars} size="lg" />

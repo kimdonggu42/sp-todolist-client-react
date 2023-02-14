@@ -36,9 +36,9 @@ function App() {
         <GlobalStyle />
           <Routes>
             <Route path='/' element={<AllTodoList isChange={isChange} changeMode={changeMode} />} />
-            <Route path='/today' element={<TodayTodoList />} />
-            <Route path='/tomorrow' element={<TomorrowTodoList />} />
-            <Route path='/yesterday' element={<YesterdayTodoList />} />
+            <Route path='/today' element={<TodayTodoList isChange={isChange} changeMode={changeMode} />} />
+            <Route path='/tomorrow' element={<TomorrowTodoList isChange={isChange} changeMode={changeMode} />} />
+            <Route path='/yesterday' element={<YesterdayTodoList isChange={isChange} changeMode={changeMode} />} />
           </Routes>
       </div>
     </ThemeProvider>

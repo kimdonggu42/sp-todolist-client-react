@@ -1,11 +1,11 @@
 import TomorrowHeader from "../Components/TomorrowHeader";
 import TomorrowMain from "../Components/TomorrowMain";
 
-function TomorrowTodoList() {
+function TomorrowTodoList({ isChange, changeMode }) {
 
     return (
         <div className="mainPage">
-            <TomorrowHeader />
+            <TomorrowHeader isChange={isChange} changeMode={changeMode} />
             <TomorrowMain />
         </div>
     );

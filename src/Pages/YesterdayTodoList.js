@@ -1,11 +1,11 @@
 import YesterdayHeader from "../Components/YesterdayHeader";
 import YesterdayMain from "../Components/YesterdayMain";
 
-function YesterdayTodoList() {
+function YesterdayTodoList({ isChange, changeMode }) {
 
     return (
         <div className="mainPage">
-            <YesterdayHeader />
+            <YesterdayHeader isChange={isChange} changeMode={changeMode} />
             <YesterdayMain />
         </div>
     );
