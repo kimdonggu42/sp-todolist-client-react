@@ -1,11 +1,11 @@
 import TodayHeader from "../Components/TodayHeader";
 import TodayMain from "../Components/TodayMain";
 
-function TodayTodoList() {
+function TodayTodoList({ isChange, changeMode }) {
 
     return (
         <div className="mainPage">
-            <TodayHeader />
+            <TodayHeader isChange={isChange} changeMode={changeMode} />
             <TodayMain />
         </div>
     );
