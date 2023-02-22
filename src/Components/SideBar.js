@@ -105,7 +105,9 @@ function SideBar({ isOpen, setIsOpen }) {
     const sideBarCloseHandle = () => {
         setIsOpen(false);
         // 모달 창 오픈 시 뒷 페이지 스크롤 방지 해제
-        document.body.style.overflow = "unset"
+        const scrollY = document.body.style.top;
+        document.body.style.cssText = '';
+        window.scrollTo(0, parseInt(scrollY || '0', 10) * -1);
     };
 
     // const userMenu = useRef(null)

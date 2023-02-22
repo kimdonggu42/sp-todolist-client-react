@@ -44,7 +44,11 @@ function Header({ isChange, changeMode }) {
     const sideBarHandle = () => {
         setIsOpen(true);
         // 모달 창 오픈 시 뒷 페이지 스크롤 방지
-        document.body.style.overflow = "hidden";
+        document.body.style.cssText = `
+        position: fixed; 
+        top: -${window.scrollY}px;
+        overflow-y: scroll;
+        width: 100%;`;
     }
 
     return (
