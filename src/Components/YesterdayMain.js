@@ -1,6 +1,6 @@
 import * as Main from "./Main";
 import TodoList from "./TodoList";
-import Pagenation from "./Pagenation";
+import Pagination from "./Pagination";
 import uuid from "react-uuid";
 import axios from "axios";
 import { useState, useEffect } from "react";
@@ -197,7 +197,7 @@ function YesterdayMain() {
                     </ul>
                 )}
             {/* 페이지네이션 */}
-            <Pagenation
+            <Pagination
                 allPageLength={yesterdayTodoData.length}
                 completePageLength={yesterdayTodoData.filter((value) => checkedItems.includes(value.id)).length}
                 incompletePageLength={yesterdayTodoData.filter((value) => !checkedItems.includes(value.id)).length}

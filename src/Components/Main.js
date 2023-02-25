@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import TodoList from "./TodoList";
-import Pagenation from "./Pagenation";
+import Pagination from './Pagination';
 import uuid from "react-uuid";
 import axios from "axios";
 import { useState, useEffect } from "react";
@@ -272,12 +272,9 @@ function Main() {
         setCurrentTab(index);
     };
 
-    // 페이지 당 표시할 데이터 수 상태
-    const [limit, setLimit] = useState(10);  // 기본값: 10개씩 노출
-    // 현재 페이지 번호 상태
-    const [page, setPage] = useState(1);  // 기본값: 1페이지부터 노출
-    // 각 페이지에서 첫 데이터의 위치(index) 계산
-    const offset = (page - 1) * limit;
+    const [limit, setLimit] = useState(10);  // 페이지 당 표시할 데이터 수 (기본값: 10개씩 노출)
+    const [page, setPage] = useState(1);  // 현재 페이지 번호 (기본값: 1페이지부터 노출)
+    const offset = (page - 1) * limit;  // 각 페이지에서 첫 데이터의 위치(index) 계산
 
     // Enter 키 입력 시에도 동일하게 addTodoText 이벤트 핸들러 동작하게 하는 이벤트 핸들러
     // const handleKeyupTodoText = (event) => {
@@ -286,7 +283,7 @@ function Main() {
     //     }
     // };
 
-    // 체크박스 상태 체크
+    // 체크박스 상태 체크 함수
     const handleCheckChange = (checked, id) => {
         if (checked) {
             setCheckedItems([...checkedItems, id]);
@@ -390,7 +387,7 @@ function Main() {
                     </ul>
                 )}
             {/* 페이지네이션 */}
-            <Pagenation
+            <Pagination
                 allPageLength={todoData.length}
                 completePageLength={todoData.filter((value) => checkedItems.includes(value.id)).length}
                 incompletePageLength={todoData.filter((value) => !checkedItems.includes(value.id)).length}

@@ -363,6 +363,11 @@ function TodoList({ list, handleCheckChange, checkedItems, getTodoData }) {
         getTodoData(res);
     };
 
+    // Delete useParams 사용할 경우
+    // const onDelete = async () => {
+    //     await axios.delete(`http://localhost:3001/questions/${id}`);
+    //   };
+
     // 투두 삭제 모달 오픈 이벤트 핸들러
     const openModalHandler = () => {
         setDeleteModalOpen(!deleteModalOpen);
