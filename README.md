@@ -1,1 +1,4 @@
 # Install
+```
+npm install
+```
