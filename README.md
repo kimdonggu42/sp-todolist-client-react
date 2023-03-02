@@ -8,7 +8,7 @@ npm install
 ```
 npm run start
 ```
-## server
+- server
 ```
 cd data
 json-server --watch data.json --port 3001
