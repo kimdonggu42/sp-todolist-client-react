@@ -1,9 +1,11 @@
-# Install
+# My Todo List App
+
+## Install
 ```
 npm install
 ```
 
-# Usage
+## Usage
 - client
 ```
 npm run start
