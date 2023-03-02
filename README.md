@@ -31,3 +31,6 @@ $ json-server --watch data.json --port 3001
 ![Mar-02-2023 22-28-08](https://user-images.githubusercontent.com/115632555/222442050-cc21e4ab-82c8-41d7-b1f5-510282fb43d4.gif)
 
 - Delete Todo
+
+![Mar-02-2023 23-05-00](https://user-images.githubusercontent.com/115632555/222450858-b4d8f503-9fba-4e85-be74-2569b7af274a.gif)
+
