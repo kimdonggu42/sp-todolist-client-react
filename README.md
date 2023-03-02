@@ -4,7 +4,7 @@ npm install
 ```
 
 # Usage
-## client
+- client
 ```
 npm run start
 ```
