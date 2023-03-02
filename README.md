@@ -23,5 +23,8 @@ $ json-server --watch data.json --port 3001
 ![Mar-02-2023 22-04-49](https://user-images.githubusercontent.com/115632555/222436786-09834819-5a26-4021-a77c-400a52af38e7.gif)
 
 - Read Todo
+
+![Mar-02-2023 22-25-36](https://user-images.githubusercontent.com/115632555/222441256-5c619bc6-cdb2-43d7-8091-3a1050b2ac85.gif)
+
 - Update Todo
 - Delete Todo
