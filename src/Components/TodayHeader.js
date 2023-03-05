@@ -1,12 +1,14 @@
 import * as Header from "./Header";
 import SideBar from './SideBar';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import { ThemeContext } from "../theme";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import { faSun, faMoon } from '@fortawesome/free-regular-svg-icons';
 
-function TodayHeader({ isChange, changeMode }) {
+function TodayHeader() {
     const [isOpen, setIsOpen] = useState(false);
+    const { isChange, changeMode } = useContext(ThemeContext);
 
     const sideBarHandle = () => {
         setIsOpen(true);

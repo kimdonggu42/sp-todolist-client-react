@@ -1,3 +1,7 @@
+import { createContext } from "react"
+
+export const ThemeContext = createContext(null);
+
 export const lightTheme = {
     backgroundColor: `white`,
     title: `#46554a`,

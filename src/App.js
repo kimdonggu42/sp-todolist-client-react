@@ -5,6 +5,7 @@ import TomorrowTodoList from './Pages/TomorrowTodoList';
 import YesterdayTodoList from './Pages/YesterdayTodoList';
 import { Routes, Route } from 'react-router-dom';
 import { useState } from 'react';
+import { ThemeContext } from './theme';
 import { createGlobalStyle, ThemeProvider } from 'styled-components';
 import { lightTheme, darkTheme } from './theme';
 
@@ -31,17 +32,19 @@ function App() {
   }
 
   return (
-    <ThemeProvider theme={isChange ? darkTheme : lightTheme}>
-      <div className="App">
-        <GlobalStyle />
+    <ThemeContext.Provider value={{ isChange, changeMode }}>
+      <ThemeProvider theme={isChange ? darkTheme : lightTheme}>
+        <div className="App">
+          <GlobalStyle />
           <Routes>
-            <Route path='/' element={<AllTodoList isChange={isChange} changeMode={changeMode} />} />
-            <Route path='/today' element={<TodayTodoList isChange={isChange} changeMode={changeMode} />} />
-            <Route path='/tomorrow' element={<TomorrowTodoList isChange={isChange} changeMode={changeMode} />} />
-            <Route path='/yesterday' element={<YesterdayTodoList isChange={isChange} changeMode={changeMode} />} />
+            <Route path='/' element={<AllTodoList />} />
+            <Route path='/today' element={<TodayTodoList />} />
+            <Route path='/tomorrow' element={<TomorrowTodoList />} />
+            <Route path='/yesterday' element={<YesterdayTodoList />} />
           </Routes>
-      </div>
-    </ThemeProvider>
+        </div>
+      </ThemeProvider>
+    </ThemeContext.Provider>
   );
 }
 

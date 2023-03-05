@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import SideBar from './SideBar';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import { ThemeContext } from '../theme';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import { faSun, faMoon } from '@fortawesome/free-regular-svg-icons';
@@ -38,8 +39,9 @@ export const SideBarButton = styled.div`
     }
 `;
 
-function Header({ isChange, changeMode }) {
+function Header() {
     const [isOpen, setIsOpen] = useState(false);
+    const { isChange, changeMode } = useContext(ThemeContext);
 
     const sideBarHandle = () => {
         setIsOpen(true);
