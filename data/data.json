@@ -1,3 +1,19 @@
 {
-  "todos": []
+  "todos": [
+    {
+      "id": "62ca18af-fda4-ff84-4899-9db36b63200b",
+      "createdAt": "2023-03-06",
+      "content": "오늘 할 일"
+    },
+    {
+      "id": "360505cc-bb41-5089-e9ea-12e065c6b92c",
+      "createdAt": "2023-03-05",
+      "content": "어제 한 일"
+    },
+    {
+      "id": "325bd8aa-f046-3ef9-f375-f74f2d9214c8",
+      "createdAt": "2023-03-07",
+      "content": "내일 할 일"
+    }
+  ]
 }

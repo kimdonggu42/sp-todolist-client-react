@@ -1,11 +1,11 @@
 import Header from "../Components/Header";
 import Main from "../Components/Main";
 
-function AllTodoList({ isChange, changeMode }) {
+function AllTodoList() {
 
     return (
         <div className="mainPage">
-            <Header isChange={isChange} changeMode={changeMode} />
+            <Header />
             <Main />
         </div>
     );
